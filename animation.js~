@@ -1,0 +1,34 @@
+
+alert("Hi are you connected?")
+var coinImage = new Image();
+coinImage.src="coin-sprite-animation-sprite-sheet.png";
+
+function coin (features) {
+
+        var thiscoin = {};
+        thiscoin.context = features.context;
+        thiscoin.width = features.width;
+        thiscoin.height = features.height;
+        thiscoin.image = features.image;
+        
+        thiscoin.render = function(){
+                this.context.drawImage(thiscoin.image,0,0,thiscoin.width,thiscoin.height,0,0,thiscoin.width,thiscoin.height);
+        
+        
+        };
+        
+        return thiscoin;
+}
+
+var canvas = document.getElementById("coinAnimation");
+canvas.width = 100;
+canvas.height = 100;
+
+var coin = coin({context: canvas.getContext("2d"), width: 100, height:100, image: coinImage});
+
+var dothething = function(){
+        coin.render();
+        alert("Hey");
+};
+
+
