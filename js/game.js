@@ -1,6 +1,5 @@
 
 
-
 /*things I need:
 Possible choices
 Combinations for each trial
@@ -17,6 +16,19 @@ var canvas = document.getElementById("canvas");
 var stage = new createjs.Stage(canvas);
 stage.enableMouseOver();
 
+//welcome
+var text = new createjs.Text("Welcome to the", "bold 48px Arial", "white");
+text.x=300;
+text.y=10;
+text.shadow = new createjs.Shadow("#000", 4, 4, 8);
+stage.addChild(text);
+var text2 = new createjs.Text("Concept Factory", "bold 70px Arial", "white");
+text2.shadow = new createjs.Shadow("#000", 4, 4, 8);
+stage.addChild(text2);
+text2.x=225;
+text2.y=80;
+stage.update();
+
 //here is the "apply box"
 var box = new createjs.Bitmap("images/metalbox.jpg");
 box.scaleX = .50;
@@ -29,9 +41,9 @@ stage.addChild(box);
 var left = new createjs.Bitmap("images/left.png");
 left.scaleX = .50;
 left.scaleY = .50;
-//left.x = 0;
-//left.y = 260;
-//stage.addChild(left);
+left.x = 0;
+left.y = 260;
+stage.addChild(left);
 
 //right robot arm
 var right = new createjs.Bitmap("images/right.png");
@@ -41,10 +53,13 @@ right.x = 680;
 right.y = 260;
 stage.addChild(right);
 
+//tile holder
 var holder = new createjs.Bitmap("images/holder2.jpg");
 holder.y=550;
 holder.x=225;
 stage.addChild(holder);
+
+//all the tiles
 var t1 = new createjs.Bitmap("images/s1.jpg");
 t1.y=600;
 t1.x=260;
@@ -66,34 +81,10 @@ t6.x=710;
 
 
 
-stage.addChild(t1);
-stage.addChild(t2);
-stage.addChild(t3);
-stage.addChild(t4);
-stage.addChild(t5);
-stage.addChild(t6);
-
-
-
-
-var text = new createjs.Text("Welcome to the", "bold 48px Arial", "white");
-text.x=300;
-text.y=10;
-text.shadow = new createjs.Shadow("#000", 4, 4, 8);
-stage.addChild(text);
-var text2 = new createjs.Text("Concept Factory", "bold 70px Arial", "white");
-text2.shadow = new createjs.Shadow("#000", 4, 4, 8);
-stage.addChild(text2);
-text2.x=225;
-text2.y=80;
-stage.update();
-
-
-
-
 //possible choices
 var choices = [t1,t2,t3,t4,t5,t6]
 for(var t=0; t< choices.length;t++) {
+        stage.addChild(choices[t]);
         choices[t].shadow = new createjs.Shadow("#808080", 3, 3, 0);
         choices[t].on("pressmove", function(evt) {
                 evt.target.x = evt.stageX;
@@ -104,16 +95,7 @@ for(var t=0; t< choices.length;t++) {
         choices[t].on("mouseout", function(evt){this.shadow = new createjs.Shadow("#808080", 3, 3, 0);});
 
 }
-var movearms =function(){
-createjs.Tween.get(left, {loop:false})
-        .to({ x: 200 }, 1500, createjs.Ease.none)
-        .to({ x: 0 }, 1500, createjs.Ease.none)
-createjs.Tween.get(right, {loop:false})
-        .to({ x: 500 }, 1500, createjs.Ease.none)
-        .to({ x: 680 }, 1500, createjs.Ease.none)
 
-                
-};
 
 var bouncetile = function(t){
         createjs.Tween.get(t)
@@ -123,28 +105,79 @@ var bouncetile = function(t){
 
 }
 
-circle = new createjs.Shape();
-circle.graphics.setStrokeStyle(2).beginStroke("black")
-.beginFill("red").drawCircle(350,90, 10);
+//our arguments!
+f1 = new createjs.Bitmap("images/s1.jpg");
+f2 = new createjs.Bitmap("images/s2.jpg");
+f3 = new createjs.Bitmap("images/s3.jpg");
+f4 = new createjs.Bitmap("images/s4.jpg");
+args1 = [f1,f2,f3,f4];
+for(var f=0; f< args1.length;f++){
+        args1[f].x=325;
+        args1[f].y=305;
+}
+a1 = new createjs.Bitmap("images/s1.jpg");
+a2 = new createjs.Bitmap("images/s2.jpg");
+a3 = new createjs.Bitmap("images/s3.jpg");
+a4 = new createjs.Bitmap("images/s4.jpg");
+args2 = [a1,a2,a3,a4];
+for(var f=0; f< args2.length;f++){
+        args2[f].x=590;
+        args2[f].y=305;
+}
 
-var container = new createjs.Container();
-container.addChild(left,circle);
-container.x = 0;
-container.y = 260;
 
-stage.addChild(container);
+//moving the arms, with their arguments
+var movearms =function(arg1,arg2){
 
-//var loadArms(obj1,obj2){
+        stage.addChild(arg1);
+        stage.addChild(arg2);
+        createjs.Tween.get(left, {loop:false})
+                .to({ x: 115 }, 1200, createjs.Ease.none)
+                .to({ x: 0 }, 1200, createjs.Ease.none)
+        createjs.Tween.get(arg1, {loop:false})
+                .to({ x: 425 }, 1200, createjs.Ease.none)
+                
+                
+        createjs.Tween.get(right, {loop:false})
+                .to({ x: 570 }, 1200, createjs.Ease.none)
+                .to({ x: 680 }, 1200, createjs.Ease.none)
+        createjs.Tween.get(arg2, {loop:false})
+                .to({ x: 510 }, 1200, createjs.Ease.none)  
+        arg1.shadow = new createjs.Shadow("red", 3, 3, 25)
+        arg2.shadow = new createjs.Shadow("blue", 3, 3, 25) 
+        time1=false;
+        time2=true;
+        nextSequence();
+                    
+};
 
+
+
+
+
+time1 = true;
+time2 = false;
+time3 = false;
+time4 = false;
+
+
+var nextSequence = function(){
+
+
+        if(time1){
+        //choose random arguments, place them in "apply" box
+             movearms(args1[Math.floor(Math.random() * args1.length)],args2[Math.floor(Math.random() * args2.length)]);   
         
+        }
+       
 
-//}
+
+}
+
+nextSequence();
 
 
-
-movearms();
-//bouncetile(t2);
-
+//reload frames
 createjs.Ticker.setFPS(60);
 createjs.Ticker.addEventListener("tick", stage);
 
