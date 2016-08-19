@@ -10,7 +10,6 @@ Feedback for correct answer
 */
 
 
-
 //set up the stage
 var canvas = document.getElementById("canvas");
 var stage = new createjs.Stage(canvas);
@@ -81,6 +80,7 @@ t6.x=710;
 
 
 
+var game = function(){
 //possible choices
 var choices = [t1,t2,t3,t4,t5,t6]
 for(var t=0; t< choices.length;t++) {
@@ -127,7 +127,7 @@ for(var f=0; f< args2.length;f++){
 
 
 //moving the arms, with their arguments
-var movearms =function(arg1,arg2){
+var movearms =function(arg1,arg2,correct){
 
         stage.addChild(arg1);
         stage.addChild(arg2);
@@ -136,49 +136,81 @@ var movearms =function(arg1,arg2){
                 .to({ x: 0 }, 1200, createjs.Ease.none)
         createjs.Tween.get(arg1, {loop:false})
                 .to({ x: 425 }, 1200, createjs.Ease.none)
-                
-                
+
+
         createjs.Tween.get(right, {loop:false})
                 .to({ x: 570 }, 1200, createjs.Ease.none)
                 .to({ x: 680 }, 1200, createjs.Ease.none)
         createjs.Tween.get(arg2, {loop:false})
-                .to({ x: 510 }, 1200, createjs.Ease.none)  
+                .to({ x: 510 }, 1200, createjs.Ease.none)
         arg1.shadow = new createjs.Shadow("red", 3, 3, 25)
-        arg2.shadow = new createjs.Shadow("blue", 3, 3, 25) 
-        time1=false;
-        time2=true;
-        nextSequence();
-                    
-};
+        arg2.shadow = new createjs.Shadow("blue", 3, 3, 25)
 
 
+                createjs.Tween.get(correct, {loop:false})
 
 
+                        .wait(2500)
+                        .call(turngreen)
+                        .to({scaleX: 1.2, scaleY: 1.2})
+                        .to({y:560},400)
+                        .wait(500)
+                        .to({y:600},400)
+                        .to({scaleX: 1, scaleY: 1})
+                        .to({scaleX: 1.2, scaleY: 1.2})
+                        .to({y:560},400)
+                        .wait(500)
+                        .to({y:600},400)
+                        .to({scaleX: 1, scaleY: 1})
+                        .to({scaleX: 1.2, scaleY: 1.2})
+                        .to({y:560},400)
+                        .wait(500)
+                        .to({y:600},400)
+                        .to({scaleX: 1, scaleY: 1})
+                        .to({scaleX: 1.2, scaleY: 1.2})
+                        .to({y:560},400)
+                        .wait(500)
+                        .to({y:600},400)
+                        .to({scaleX: 1, scaleY: 1})
 
-time1 = true;
-time2 = false;
-time3 = false;
-time4 = false;
+                        .call(turnback)
 
 
-var nextSequence = function(){
-
-
-        if(time1){
-        //choose random arguments, place them in "apply" box
-             movearms(args1[Math.floor(Math.random() * args1.length)],args2[Math.floor(Math.random() * args2.length)]);   
-        
+        function turngreen() {
+                correct.shadow=new createjs.Shadow("#49e17a", 3, 3, 25);
         }
-       
+        function turnback() {
+                correct.shadow=new createjs.Shadow("#808080", 3, 3, 0);
+        }
 
+
+
+
+};
+        choices.shift();
+        var nextSequence = function(choices){
+
+
+
+                //choose random arguments, place them in "apply" box
+                movearms(args1[Math.floor(Math.random() * args1.length)],args2[Math.floor(Math.random() * args2.length)],choices[0]);
+
+
+
+
+        }
+
+        nextSequence();
 
 }
 
-nextSequence();
+while(choices.length>0){
+        game();
+}
+
+
 
 
 //reload frames
 createjs.Ticker.setFPS(60);
 createjs.Ticker.addEventListener("tick", stage);
-
-
