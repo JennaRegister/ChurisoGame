@@ -45,6 +45,33 @@ stage.update();
                 box.x = 400;
                 box.y = 260;
                 stage.addChild(box);
+                var gear = new createjs.Bitmap("images/gear.png");
+                gear.scaleX = .3;
+                gear.scaleY = .3;
+                gear.x=440;
+                gear.y = 290;
+                gear.regX=150;
+                gear.regY = 150;
+                
+                stage.addChild(gear);
+                var gear2 = new createjs.Bitmap("images/gear.png");
+                gear2.scaleX = .2;
+                gear2.scaleY = .2;
+                gear2.x=440;
+                gear2.y = 350;
+                gear2.regX=150;
+                gear2.regY = 150;
+                stage.addChild(gear2);
+                var gear3 = new createjs.Bitmap("images/gear.png");
+                gear3.scaleX = .3;
+                gear3.scaleY = .3;
+                gear3.x=575;
+                gear3.y = 420;
+                gear3.regX=150;
+                gear3.regY = 150;
+                
+                stage.addChild(gear3);
+              
 
                 //left robot arm
                 var left = new createjs.Bitmap("images/left.png");
@@ -78,13 +105,13 @@ stage.update();
                 var t3 = new createjs.Bitmap("images/s3.jpg");
                 t3.y=600;
                 t3.x=440;
-                var t4 = new createjs.Bitmap("images/s4.jpg");
+                var t4 = new createjs.Bitmap("images/s7.jpg");
                 t4.y=600;
                 t4.x=530;
-                var t5 = new createjs.Bitmap("images/s5.jpg");
+                var t5 = new createjs.Bitmap("images/s8.jpg");
                 t5.y=600;
                 t5.x=620;
-                var t6 = new createjs.Bitmap("images/s2.jpg");
+                var t6 = new createjs.Bitmap("images/s10.jpg");
                 t6.y=600;
                 t6.x=710;
 
@@ -136,26 +163,29 @@ stage.update();
                 f1 = new createjs.Bitmap("images/s1.jpg");
                 f2 = new createjs.Bitmap("images/s2.jpg");
                 f3 = new createjs.Bitmap("images/s3.jpg");
-                f4 = new createjs.Bitmap("images/s4.jpg");
+                f4 = new createjs.Bitmap("images/s7.jpg");
                 args1 = [f1,f2,f3,f4];
                 for(var f=0; f< args1.length;f++){
-                        args1[f].x=325;
-                        args1[f].y=305;
+                        args1[f].x=355;
+                        args1[f].y=335;
                 }
                 a1 = new createjs.Bitmap("images/s1.jpg");
                 a2 = new createjs.Bitmap("images/s2.jpg");
                 a3 = new createjs.Bitmap("images/s3.jpg");
-                a4 = new createjs.Bitmap("images/s4.jpg");
+                a4 = new createjs.Bitmap("images/s7.jpg");
                 args2 = [a1,a2,a3,a4];
                 for(var f=0; f< args2.length;f++){
-                        args2[f].x=590;
-                        args2[f].y=305;
+                        args2[f].x=655;
+                        args2[f].y=335;
                 }
 
 
                 //moving the arms, with their arguments
                 var movearms =function(arg1,arg2,correct){
-                       
+                       arg1.regX = 40;
+                       arg1.regY = 35;
+                       arg2.regX=40;
+                       arg2.regY=35;
                         stage.addChild(arg1);
                         stage.addChild(arg2);
                         
@@ -163,56 +193,70 @@ stage.update();
                                 .to({ x: 115 }, 1200, createjs.Ease.none)
                                 .to({ x: 0 }, 1200, createjs.Ease.none)
                         createjs.Tween.get(arg1, {loop:false})
-                                .to({ x: 425 }, 1200, createjs.Ease.none)
-                                .to({rotation: 360},300)
-                                .to({ alpha: .6, x:465 }, 500, createjs.Ease.getPowInOut(2))
+                                .to({ x: 445 }, 1200, createjs.Ease.none)
+                                .to({rotation: 360},500)
+                                .to({ alpha: .6, x:515 }, 500, createjs.Ease.getPowInOut(2))
 
 
                         createjs.Tween.get(right, {loop:false})
                                 .to({ x: 570 }, 1200, createjs.Ease.none)
                                 .to({ x: 680 }, 1200, createjs.Ease.none)
                         createjs.Tween.get(arg2, {loop:false})
-                                .to({ x: 510 }, 1200, createjs.Ease.none)
-                                .to({rotation: -360},300)
-                                .to({ alpha: .6, x:465 }, 500, createjs.Ease.getPowInOut(2))
-                        arg1.shadow = new createjs.Shadow("red", 3, 3, 25)
-                        arg2.shadow = new createjs.Shadow("blue", 3, 3, 25)
+                                .to({ x: 550 }, 1200, createjs.Ease.none)
+                                .to({rotation: -360},500)
+                                .to({ alpha: .6, x:515 }, 500, createjs.Ease.getPowInOut(2))
+                        arg1.shadow = new createjs.Shadow("yellow", 3, 3, 25)
+                        arg2.shadow = new createjs.Shadow("yellow", 3, 3, 25)
+                        createjs.Tween.get(gear, {loop:false})
+                                .wait(900)
+                                .to({rotation: 360},2000)
+                        createjs.Tween.get(gear2, {loop:false})
+                                .wait(900)
+                                .to({rotation: 360},2000)
+                        createjs.Tween.get(gear3, {loop:false})
+                                .wait(900)
+                                .to({rotation: 360},2000)     
                                 
 
-
+                                stage.removeChild(correct);
+                                stage.addChild(correct);
                                 createjs.Tween.get(correct, {loop:false})
 
 
                                         .wait(2500)
                                         .call(turngreen)
                                         .to({scaleX: 1.2, scaleY: 1.2})
-                                        //.to({x:480,y:305})
-                                        .to({y:560},400)
+                                        .to({ alpha: .6, x:470, y:290 }, 500, createjs.Ease.getPowInOut(2))
+                                        .to({ alpha: 1, x:470, y:290 }, 500, createjs.Ease.getPowInOut(2))
+                                        .to({x:470,y:290})
+                                        
+                                        
+                                        //.to({y:560},400)
                                         .wait(500)
-                                        .to({y:600},400)
+                                        .to({y:280},400)
                                         .to({scaleX: 1, scaleY: 1})
                                         .to({scaleX: 1.2, scaleY: 1.2})
-                                        .to({y:560},400)
+                                        .to({y:290},400)
                                         .wait(500)
-                                        .to({y:600},400)
+                                        .to({y:280},400)
                                         .to({scaleX: 1, scaleY: 1})
                                         .to({scaleX: 1.2, scaleY: 1.2})
-                                        .to({y:560},400)
+                                        .to({y:290},400)
                                         .wait(500)
-                                        .to({y:600},400)
+                                        .to({y:280},400)
                                         .to({scaleX: 1, scaleY: 1})
                                         .to({scaleX: 1.2, scaleY: 1.2})
-                                        .to({y:560},400)
-                                        .wait(500)
-                                        .to({y:600},400)
-                                        .to({scaleX: 1, scaleY: 1})
+                                        .to({y:290},400)
+                                        
+                                        
+                                        
 
                                         .call(turnback)
                                         .call(lightbutton)
 
 
                         function turngreen() {
-                                correct.shadow=new createjs.Shadow("#49e17a", 3, 3, 25);
+                                correct.shadow=new createjs.Shadow("yellow", 3, 3, 25);
                         }
                         function turnback() {
                                 correct.shadow=new createjs.Shadow("#808080", 3, 3, 0);
