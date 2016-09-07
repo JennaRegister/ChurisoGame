@@ -143,67 +143,109 @@ var game = function(){
                 for(var t=0; t< choices.length;t++) {
                         stage.addChild(choices[t]);
                         //choices[t].shadow = new createjs.Shadow("#808080", 3, 3, 0);
-                        choices[t].on("mouseover", function(evt){this.shadow = new createjs.Shadow("#49e17a", 3, 3, 25);});
+                        choices[t].on("mouseover", function(evt){this.shadow = new createjs.Shadow("yellow", 3, 3, 25);});
                         choices[t].on("mouseout", function(evt){this.shadow = new createjs.Shadow("#808080", 3, 3, 0);});
+                        choices[t].regX=choices[t].regY=0;
 
                 }
 
 
-                //our arguments!
-                f1 = new createjs.Bitmap("images/o1.png");
-                f2 = new createjs.Bitmap("images/o2.png");
-                f3 = new createjs.Bitmap("images/o3.png");
-                f4 = new createjs.Bitmap("images/o4.png");
-                argo1 = [f1,f2,f3,f4];
-                for(var f=0; f< argo1.length;f++){
-                        argo1[f].x=355;
-                        argo1[f].y=335;
-                }
-                a1 = new createjs.Bitmap("images/o1.png");
-                a2 = new createjs.Bitmap("images/o2.png");
-                a3 = new createjs.Bitmap("images/o3.png");
-                a4 = new createjs.Bitmap("images/o4.png");
-                argo2 = [a1,a2,a3,a4];
-                for(var f=0; f< argo2.length;f++){
-                        argo2[f].x=655;
-                        argo2[f].y=335;
-                }
-
-
-                //moving the arms, with their arguments
-               arg1 = argo1[Math.floor(Math.random() * argo1.length)]
-               arg2 = argo2[Math.floor(Math.random() * argo2.length)]
-               correct = choices[Math.floor(Math.random() * choices.length)]
-               arg1.regX = 40;
-               arg1.regY = 35;
-               arg2.regX=40;
-               arg2.regY=35;
-               stage.addChild(arg1,arg2);
+              
+               //our arguments
                
+               switch(condition){
+                //CONDITION 0: a a -> a
+                case 0:
+                        var index = Math.floor(Math.random() * tiles.length);
+                        
+                        var arg1 =  new createjs.Bitmap(tiles[index]);
+                        arg1.x = 295;
+                        arg1.y = 315;
+                        var arg2 =  new createjs.Bitmap(tiles[index]);
+                        arg2.x = 645;
+                        arg2.y = 315;
+                        
+                        var correct =  new createjs.Bitmap(tiles[index]);
+                        
+                        break;
+                   //CONDITION 1: a a -> b
+                   case 1:
+                        var index = Math.floor(Math.random() * tiles.length);
+                        
+                        var arg1 =  new createjs.Bitmap(tiles[index]);
+                        var arg2 =  new createjs.Bitmap(tiles[index]);
+                        var correct =  new createjs.Bitmap(tiles[index]);
+                    
+                        break;
+                        
+                        
+                        
+               
+               
+               
+               
+               
+               
+               
+               
+               
+               
+               
+               
+               
+               
+               
+               
+               
+               
+               
+               
+               
+               
+               
+               
+               }
+                arg1.x = 295;
+                arg1.y = 315;
+                arg2.x = 645;
+                arg2.y = 315;
+                correct.x = 470;
+                correct. y = 290;
+                correct.alpha = 0;
+                correct.regX=correct.regY=40;
+                arg1.regX = 40;
+                arg1.regY = 35;
+                arg2.regX=40;
+                arg2.regY=35;
+                stage.addChild(arg1,arg2);
+       
 
                //some funky movement now!
 
                //move the left arm
                 createjs.Tween.get(left, {loop:false})
+                        .wait(500)
                         .to({ x: 115 }, 1200, createjs.Ease.none)
                         .to({ x: 0 }, 1200, createjs.Ease.none)
                 //move the first argument with the left arm
                 createjs.Tween.get(arg1, {loop:false})
-                        .to({ x: 445 }, 1200, createjs.Ease.none)
-                        .to({rotation: 360},500)
-                        .to({ alpha: 0, x:515 }, 500, createjs.Ease.getPowInOut(2))
+                        .wait(500)
+                        .to({ x: 410 }, 1200, createjs.Ease.none)
+                        //.to({rotation: 360},500)
+                        .to({ alpha: 0, x:445 }, 500, createjs.Ease.getPowInOut(2))
 
                 //move the right arm
                 createjs.Tween.get(right, {loop:false})
-                        .to({ x: 570 }, 1200, createjs.Ease.none)
+                        .wait(500)
+                        .to({ x: 565 }, 1200, createjs.Ease.none)
                         .to({ x: 680 }, 1200, createjs.Ease.none)
                 //move the second argument with the right arm
                 createjs.Tween.get(arg2, {loop:false})
-                        .to({ x: 550 }, 1200, createjs.Ease.none)
-                        .to({rotation: -360},500)
-                        .to({ alpha: 0, x:515 }, 500, createjs.Ease.getPowInOut(2))
-                arg1.shadow = new createjs.Shadow("yellow", 3, 3, 25)
-                arg2.shadow = new createjs.Shadow("yellow", 3, 3, 25)
+                        .wait(500)
+                        .to({ x: 530 }, 1200, createjs.Ease.none)
+                        //.to({rotation: -360},500)
+                        .to({ alpha: 0, x:505 }, 500, createjs.Ease.getPowInOut(2))
+               
 
                 //rotate the gears all cute-like and whatnot
                 createjs.Tween.get(gear, {loop:false})
@@ -219,9 +261,10 @@ var game = function(){
 
                 stage.removeChild(correct);
                 stage.addChild(correct);
+                
                 //show the correct!
                 createjs.Tween.get(correct, {loop:false})
-                        .wait(2500)
+                        .wait(2000)
                         .call(turncolor)
                         .to({scaleX: 1.2, scaleY: 1.2})
                         .to({ alpha:.6, x:470, y:290 }, 500, createjs.Ease.getPowInOut(2))
@@ -242,6 +285,7 @@ var game = function(){
                         .to({scaleX: 1, scaleY: 1})
                         .to({scaleX: 1.2, scaleY: 1.2})
                         .to({y:290},400)
+                        .wait(500)
                         .call(turnback)
                         .call(lightbutton)
 
@@ -249,9 +293,11 @@ var game = function(){
 
                 function turncolor() {
                         correct.shadow=new createjs.Shadow("yellow", 3, 3, 25);
+                        correct.regX=correct.regY=40;
                 }
                 function turnback() {
                         correct.shadow=new createjs.Shadow("#808080", 3, 3, 0);
+                        
                         
                 }
                 //light up the next button
@@ -347,7 +393,7 @@ var game = function(){
                 back.graphics.beginFill("white").drawRoundRect(100, 270, 370, 40, 10);
                 
 
-                var instructions = new createjs.Text("We recently found tiles like these in the basement...", "15px Arial","black");
+                var instructions = new createjs.Text("We recently found objects like these in the basement...", "15px Arial","black");
                 instructions.x = 110;
                 instructions.y = 280;
                 var contain = new createjs.Container();
@@ -456,7 +502,7 @@ var game = function(){
                         .call(function(){stage.removeChild(it3)})   
                 
                 //remove the animations and move on
-                instruct.on("click",function(){stage.removeChild(instruct);stage.removeChild(contain);stage.removeChild(it1);stage.removeChild(it2);createjs.Tween.removeTweens(it3);createjs.Tween.removeTweens(it2);createjs.Tween.removeTweens(it1);intro7();});
+                instruct.on("click",function(){stage.removeChild(instruct);stage.removeChild(contain);stage.removeChild(it1);stage.removeChild(it2,it3);createjs.Tween.removeTweens(it3);createjs.Tween.removeTweens(it2);createjs.Tween.removeTweens(it1);intro7();});
 
 
         }
@@ -557,16 +603,16 @@ var game = function(){
                 stage.addChild(it4,it5,instruct,contain);
                 
                 createjs.Tween.get(it4, {loop:true})
-                        .to({ x: 570 }, 1200, createjs.Ease.none)
-                        .to({rotation: 360},500)
-                        .to({ alpha: 0, x:615 }, 500, createjs.Ease.getPowInOut(2))
+                        .to({ x: 540 }, 1000, createjs.Ease.none)
+                        //.to({rotation: 360},500)
+                        .to({ alpha: 0, x:575 }, 500)
                         .wait(800)
 
                
                 createjs.Tween.get(it5, {loop:true})
-                        .to({ x: 660 }, 1200, createjs.Ease.none)
-                        .to({rotation: -360},500)
-                        .to({ alpha: 0, x:625 }, 500, createjs.Ease.getPowInOut(2))
+                        .to({ x: 660 }, 1000, createjs.Ease.none)
+                        //.to({rotation: -360},500)
+                        .to({ alpha: 0, x:625 }, 500)
                         .wait(800)
                 it1.alpha=0;
                 it1.scaleX=it1.scaleY=1.2;
@@ -574,15 +620,13 @@ var game = function(){
                 it1.y=370;
                 it1.shadow=new createjs.Shadow("yellow",3,3,25);
                 createjs.Tween.get(it1,{loop:true})
-                        .wait(1800)
+                        .wait(1100)
                         .call(function(){stage.addChild(it1)})
                         .to({alpha:1,x:570,y:370},400)
                         .wait(800)
                         .call(function(){stage.removeChild(it1)})
                         
-                it4.shadow = new createjs.Shadow("yellow", 3, 3, 25)
-                it5.shadow = new createjs.Shadow("yellow", 3, 3, 25)
-                
+               
                 //make the little copies
                 
                 it1_copy = new createjs.Bitmap("images/o5.png");
@@ -637,9 +681,9 @@ var game = function(){
                         choices[c].scaleX=choices[c].scaleY = .6;
                         choices[c].shadow = new createjs.Shadow("gray",3,3,0);
                         choices[c].y = 620;
-                        choices[c].on("mouseover", function(evt){this.shadow = new createjs.Shadow("#49e17a", 3, 3, 25);});
+                        choices[c].on("mouseover", function(evt){this.shadow = new createjs.Shadow("yellow", 3, 3, 25);});
                         choices[c].on("mouseout", function(evt){this.shadow = new createjs.Shadow("#808080", 3, 3, 0);});
-                        choices[c].on("click", function(evt){});
+                        choices[c].on("click", function(evt){alert("Great job!");createjs.Tween.removeTweens(it1);next();});
                         stage.addChild(choices[c]);
                 
                 };
@@ -699,6 +743,18 @@ var game = function(){
         
         
         }
+        function getRandomSubarray(arr, size) {
+                var shuffled = arr.slice(0), i = arr.length, temp, index;
+                while (i--) {
+                        index = Math.floor((i + 1) * Math.random());
+                        temp = shuffled[index];
+                        shuffled[index] = shuffled[i];
+                        shuffled[i] = temp;
+                }
+                return shuffled.slice(0, size);
+        }
+
+
         
       
 
