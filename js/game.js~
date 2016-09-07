@@ -15,9 +15,9 @@ var game = function(){
         text.x=300;
         text.y=10;
         text.shadow = new createjs.Shadow("#000", 4, 4, 8);
-        var text2 = new createjs.Text("Concept Factory", "bold 70px Arial", "white");
+        var text2 = new createjs.Text("Factory", "bold 70px Arial", "white");
         text2.shadow = new createjs.Shadow("#000", 4, 4, 8);
-        text2.x=225;
+        text2.x=360;
         text2.y=80;
         stage.update();
 
@@ -56,7 +56,7 @@ var game = function(){
 
         //tile holder
         var holder = new createjs.Bitmap("images/holder2.jpg");
-        
+
 
         //all the tiles
         var t1 = new createjs.Bitmap(tiles[0]);
@@ -65,7 +65,7 @@ var game = function(){
         var t4 = new createjs.Bitmap(tiles[3]);
         var t5 = new createjs.Bitmap(tiles[4]);
         var t6 = new createjs.Bitmap(tiles[5]);
-        
+
         //intro tiles for example only!
         var it1 = new createjs.Bitmap(tiles[0]);
         var it2 = new createjs.Bitmap(tiles[1]);
@@ -74,8 +74,71 @@ var game = function(){
         var it5 = new createjs.Bitmap(tiles[4]);
         var it6 = new createjs.Bitmap(tiles[5]);
         it1.regX=it1.regY=it2.regX=it2.regY=it3.regX=it3.regY=it4.regX=it4.regY=it5.regX=it5.regY=it6.regX=it6.regY=50;
-        var next = function(){
+        var condition = Math.floor(Math.random() * 5);
+        var nextcount = 0;
+          switch(condition){
+                //CONDITION 0: a a -> a
+                case 0:
+                        var index = Math.floor(Math.random() * tiles.length);
+                        var arg1 =  new createjs.Bitmap(tiles[index]);
+                        var arg2 =  new createjs.Bitmap(tiles[index]);
+                        var correct =  new createjs.Bitmap(tiles[index]);
+                        var tinyarg1 = new createjs.Bitmap(tiles[index]);
+                        var tinyarg2 = new createjs.Bitmap(tiles[index]);
+                        var tinycorrect = new createjs.Bitmap(tiles[index]);
 
+
+                        break;
+                   //CONDITION 1: a a -> b
+                   case 1:
+                        var indexes = getRandomSubarray(tiles,2)
+                        var arg1 =  new createjs.Bitmap(indexes[0]);
+                        var arg2 =  new createjs.Bitmap(indexes[0]);
+                        var correct =  new createjs.Bitmap(indexes[1]);
+                        var tinyarg1 = new createjs.Bitmap(indexes[0]);
+                        var tinyarg2 = new createjs.Bitmap(indexes[0]);
+                        var tinycorrect = new createjs.Bitmap(indexes[1]);
+
+                        break;
+                //CONDITION 2: a b -> a
+                case 2:
+                        var indexes = getRandomSubarray(tiles,2)
+                        var arg1 =  new createjs.Bitmap(indexes[0]);
+                        var arg2 =  new createjs.Bitmap(indexes[1]);
+                        var correct =  new createjs.Bitmap(indexes[0]);
+                        var tinyarg1 = new createjs.Bitmap(indexes[0]);
+                        var tinyarg2 = new createjs.Bitmap(indexes[1]);
+                        var tinycorrect = new createjs.Bitmap(indexes[0]);
+
+                        break;
+                //CONDITION 3: a b -> b
+                case 3:
+                        var indexes = getRandomSubarray(tiles,2)
+                        var arg1 =  new createjs.Bitmap(indexes[0]);
+                        var arg2 =  new createjs.Bitmap(indexes[1]);
+                        var correct =  new createjs.Bitmap(indexes[1]);
+                        var tinyarg1 = new createjs.Bitmap(indexes[0]);
+                        var tinyarg2 = new createjs.Bitmap(indexes[1]);
+                        var tinycorrect = new createjs.Bitmap(indexes[1]);
+
+                        break;
+                //CONDITION 4: a b -> c
+                case 4:
+                        var indexes = getRandomSubarray(tiles,3)
+                        var arg1 =  new createjs.Bitmap(indexes[0]);
+                        var arg2 =  new createjs.Bitmap(indexes[1]);
+                        var correct =  new createjs.Bitmap(indexes[2]);
+                        var tinyarg1 = new createjs.Bitmap(indexes[0]);
+                        var tinyarg2 = new createjs.Bitmap(indexes[1]);
+                        var tinycorrect = new createjs.Bitmap(indexes[2]);
+
+                        break;
+
+
+               }
+        var next = function(){
+                
+                nextcount +=1;
                 stage.removeChild(it3);
                 stage.removeAllChildren();
                 stage.update();
@@ -92,28 +155,28 @@ var game = function(){
                 gear2.y = 350;
                 gear3.x=575;
                 gear3.y = 420;
-                t1.y=600;
+                
                 t1.x=260;
                 t1.scaleX = t1.scaleY = 1.
-                t2.y=600;
+                
                 t2.x=350;
                 t2.scaleX = t2.scaleY = 1.
-                t3.y=600;
+                
                 t3.x=440;
                 t3.scaleX = t3.scaleY = 1.
-                t4.y=600;
+               
                 t4.x=530;
                 t4.scaleX = t4.scaleY = 1.
-                t5.y=600;
+                
                 t5.x=620;
                 t5.scaleX = t5.scaleY = 1.
-                t6.y=600;
+                
                 t6.x=710;
                 t6.scaleX = t6.scaleY = 1.
-                
+                t1.y=t2.y=t3.y=t4.y=t5.y=t6.y=580;
 
-                
-               
+
+
                 var background = new createjs.Shape();
 		background.name = "background";
 		background.graphics.beginFill("gray").drawRoundRect(0, 0, 150, 60, 10);
@@ -130,11 +193,11 @@ var game = function(){
                 button.x = 450;
                 button.y = 735;
                 button.addChild(background, label);
-                button.on("click", handleClick);
+                
 
                 //populate the stage
                 stage.addChild(box,gear,gear2,gear3,holder,right,left,text,text2,button);
-                
+
                 //turn off the button
                 button.mouseEnabled = false;
 
@@ -150,66 +213,19 @@ var game = function(){
                 }
 
 
-              
+
                //our arguments
-               
-               switch(condition){
-                //CONDITION 0: a a -> a
-                case 0:
-                        var index = Math.floor(Math.random() * tiles.length);
-                        
-                        var arg1 =  new createjs.Bitmap(tiles[index]);
-                        arg1.x = 295;
-                        arg1.y = 315;
-                        var arg2 =  new createjs.Bitmap(tiles[index]);
-                        arg2.x = 645;
-                        arg2.y = 315;
-                        
-                        var correct =  new createjs.Bitmap(tiles[index]);
-                        
-                        break;
-                   //CONDITION 1: a a -> b
-                   case 1:
-                        var index = Math.floor(Math.random() * tiles.length);
-                        
-                        var arg1 =  new createjs.Bitmap(tiles[index]);
-                        
-                        var arg2 =  new createjs.Bitmap(tiles[index]);
-                        
-                        
-                        var correct =  new createjs.Bitmap(tiles[index]);
-                    
-                        break;
-                        
-                        
-                        
-               
-               
-               
-               
-               
-               
-               
-               
-               
-               
-               
-               
-               
-               
-               
-               
-               
-               
-               
-               
-               
-               
-               
-               
-               }
-               arg1.x = 295;
-                        arg1.y = 315;
+
+             
+                tinyarg1.scaleX = tinyarg1.scaleY = tinyarg2.scaleX = tinyarg2.scaleY = tinycorrect.scaleX = tinycorrect.scaleY = .6;
+                tinyarg1.x = 370;
+                tinyarg2.x = 470;
+                tinycorrect.x = 570;
+                tinyarg1.y = tinyarg2.y = tinycorrect.y = 460;
+                var examp = makeexample(tinyarg1,tinyarg2,tinycorrect,tinyarg1.x,tinyarg1.y);
+                stage.addChild(examp);
+                arg1.x = 295;
+                arg1.y = 315;
                 arg2.x = 645;
                 arg2.y = 315;
                 correct.x = 470;
@@ -220,8 +236,9 @@ var game = function(){
                 arg1.regY = 35;
                 arg2.regX=40;
                 arg2.regY=35;
+                arg1.alpha = arg2.alpha = 1;
                 stage.addChild(arg1,arg2);
-       
+
 
                //some funky movement now!
 
@@ -248,7 +265,7 @@ var game = function(){
                         .to({ x: 530 }, 1200, createjs.Ease.none)
                         //.to({rotation: -360},500)
                         .to({ alpha: 0, x:505 }, 500, createjs.Ease.getPowInOut(2))
-               
+
 
                 //rotate the gears all cute-like and whatnot
                 createjs.Tween.get(gear, {loop:false})
@@ -264,7 +281,7 @@ var game = function(){
 
                 stage.removeChild(correct);
                 stage.addChild(correct);
-                
+
                 //show the correct!
                 createjs.Tween.get(correct, {loop:false})
                         .wait(2000)
@@ -300,25 +317,38 @@ var game = function(){
                 }
                 function turnback() {
                         correct.shadow=new createjs.Shadow("#808080", 3, 3, 0);
-                        
-                        
+
+
                 }
                 //light up the next button
                 function lightbutton(){
                          background.graphics.beginFill("#1a8cff").drawRoundRect(0, 0, 150, 60, 10);
                          button.mouseEnabled = true;
-                         button.onClick = handleClick;
+                         console.log(nextcount);
+                         
+
+                         button.on("click", function(){if(nextcount <3){handleClick();} else{goToTest();}});
+     
                 }
 
         }
         //////////////////////////////////////END OF THE NEXT FUNCTION//////////////////////////////////
 
+        ///////////////////////////////////////TEST TRIALS//////////////////////////////////////////
+        var test = function(){
+                
+                stage.removeAllChildren();
+
+
+
+
+        }
         //first intro panel (passes to next intros)
         var intro = function(){
 
                 //make the next button for instructions
                 var instruct = makebutton();
-                
+
                 //start the instruction dialogue
                 var instructions = new createjs.Text("Welcome the the Concept Factory!", "bold 50px Arial","white");
                 instructions.x = 30;
@@ -327,25 +357,25 @@ var game = function(){
                 var pressnext = new createjs.Text("Press Next to continue.","20px Arial","black");
                 pressnext.x = 100;
                 pressnext.y = 180;
-                
-                
+
+
                 //draw Marvin
                 var robot = new createjs.Bitmap("images/robot.png");
                 robot.x = 20;
                 robot.y = 350;
                 robot.scaleX=1.2;
                 robot.scaleY=1.2;
-                
+
                 //populate the stage
                 stage.addChild(robot,instructions,pressnext,instruct);
-                
+
                 //point the button
                 instruct.on("click", function(){stage.removeChild(instruct);intro2()});
 
         };
         //second intro panel
         var intro2 = function(){
-                
+
                 var instruct = makebutton();
 
                 var back = new createjs.Shape();
@@ -358,9 +388,9 @@ var game = function(){
                 var contain = new createjs.Container();
                 contain.addChild(back,instructions);
 
-                
+
                 stage.addChild(contain,instruct);
-                
+
                 instruct.on("click",function(){stage.removeChild(instruct);stage.removeChild(contain);intro3()});
 
 
@@ -368,8 +398,8 @@ var game = function(){
         //third intro panel
         var intro3 = function(){
                 var instruct = makebutton();
-                
-                
+
+
                 var back = new createjs.Shape();
                 back.name = "back";
                 back.graphics.beginFill("white").drawRoundRect(100, 270, 350, 60, 10);
@@ -380,9 +410,9 @@ var game = function(){
                 var contain = new createjs.Container();
                 contain.addChild(back,instructions);
 
-                
+
                 stage.addChild(contain, instruct);
-               
+
                 instruct.on("click",function(){stage.removeChild(instruct);stage.removeChild(contain);intro4()});
 
 
@@ -390,18 +420,18 @@ var game = function(){
         //fourth intro panel
         var intro4 = function(){
                 var instruct = makebutton();
-                
+
                 var back = new createjs.Shape();
                 back.name = "back";
                 back.graphics.beginFill("white").drawRoundRect(100, 270, 370, 40, 10);
-                
+
 
                 var instructions = new createjs.Text("We recently found objects like these in the basement...", "15px Arial","black");
                 instructions.x = 110;
                 instructions.y = 280;
                 var contain = new createjs.Container();
                 contain.addChild(back,instructions);
-               
+
                //display some example tiles
                 it1.y = it2.y = it3.y =345;
                 it1.x = 280;
@@ -409,7 +439,7 @@ var game = function(){
                 it3.x=380;
                 it1.shadow = it2.shadow = it3.shadow = new createjs.Shadow("#808080", 3, 3, 0);
                 stage.addChild(it1,it2,contain,instruct);
-                
+
                 //bounce the tiles up and down
                 createjs.Tween.get(it1,{loop:false})
                         .to({y:it1.y-10},700)
@@ -417,7 +447,7 @@ var game = function(){
                 createjs.Tween.get(it2,{loop:false})
                         .to({y:it2.y-10},700)
                         .to({y:it2.y+10},700)
-                        
+
                 //remove the animations and move on
                 instruct.on("click",function(){stage.removeChild(instruct);stage.removeChild(contain);createjs.Tween.removeTweens(it1);createjs.Tween.removeTweens(it2);intro5()});
 
@@ -426,17 +456,17 @@ var game = function(){
         //fifth intro panel
         var intro5 = function(){
                 var instruct = makebutton();
-                
+
                 var back = new createjs.Shape();
                 back.name = "back";
                 back.graphics.beginFill("white").drawRoundRect(100, 270, 430, 40, 10);
                 var contain = new createjs.Container();
-                
+
                 var instructions = new createjs.Text("So we tried to put them in our Special Transform-O Box 3000...", "15px Arial","black");
                 instructions.x = 110;
                 instructions.y = 280;
                 contain.addChild(back,instructions);
-                
+
                 //draw the box! Apparently it is called the Special Transform-O Box 3000.
                 gear.x = 540;
                 gear.y = 350;
@@ -448,14 +478,14 @@ var game = function(){
                 box.y = 350;
                 var box_contain = new createjs.Container();
                 box_contain.addChild(box,gear,gear2,gear3);
-               
+
                 stage.addChild(contain,box_contain,instruct);
-                
+
                 //bounce the box
                 createjs.Tween.get(box_contain,{loop:false})
                         .to({y:box_contain.y-10},700)
                         .to({y:box_contain.y+10},700)
-                        
+
                 //remove the animations and move on
                 instruct.on("click",function(){stage.removeChild(instruct);createjs.Tween.removeTweens(box_contain);stage.removeChild(contain);intro6();});
 
@@ -464,7 +494,7 @@ var game = function(){
         //sixth intro panel
         var intro6 = function(){
                 var instruct = makebutton();
-                
+
                 var back = new createjs.Shape();
                 back.name = "back";
                 back.graphics.beginFill("white").drawRoundRect(100, 270, 350, 50, 10);
@@ -473,7 +503,7 @@ var game = function(){
                 instructions.x = 110;
                 instructions.y = 280;
                 contain.addChild(back,instructions);
-                
+
                 //position the tiles
                 it1.y = it2.y = 345;
                 it1.x = 280;
@@ -484,7 +514,7 @@ var game = function(){
                 stage.addChild(it1,it2,instruct,contain);
                 it3.scaleX=it3.scaleY=1.2;
                 it3.alpha=0;
-                
+
                 //move the tiles into the box
                 createjs.Tween.get(it1,{loop:true})
                         .wait(200)
@@ -493,17 +523,17 @@ var game = function(){
                 createjs.Tween.get(it2,{loop:true})
                         .wait(200)
                         .to({alpha:0,x:570, y:375},1500)
-                        .wait(1000)  
+                        .wait(1000)
                 createjs.Tween.get(it3,{loop:true})
-                        
+
                         .wait(1500)
                         .call(function(){stage.addChild(it3)})
                         .call(function(){it3.shadow= new createjs.Shadow("yellow",3,3,25)})
-                        
+
                         .to({alpha:1},400)
                         .wait(800)
-                        .call(function(){stage.removeChild(it3)})   
-                
+                        .call(function(){stage.removeChild(it3)})
+
                 //remove the animations and move on
                 instruct.on("click",function(){stage.removeChild(instruct);stage.removeChild(contain);stage.removeChild(it1);stage.removeChild(it2,it3);createjs.Tween.removeTweens(it3);createjs.Tween.removeTweens(it2);createjs.Tween.removeTweens(it1);intro7();});
 
@@ -512,18 +542,18 @@ var game = function(){
         //seventh intro panel
            var intro7 = function(){
                 var instruct = makebutton();
-                
-                
+
+
                 var back = new createjs.Shape();
                 back.name = "back";
                 back.graphics.beginFill("white").drawRoundRect(100, 270, 360, 30, 10);
                 var contain = new createjs.Container();
-                
+
                 var instructions = new createjs.Text("The only problem is... we can't figure out the pattern.", "15px Arial","black");
                 instructions.x = 110;
                 instructions.y = 280;
                 contain.addChild(back,instructions);
-                
+
                 //draw the little question tiles? what equals what? pattern how??!!
                 it1.y = it2.y = 345;
                 it1.x = 230;
@@ -536,9 +566,9 @@ var game = function(){
                 //it3.shadow = new createjs.Shadow("yellow",3,3,25);
                 quest = makequestion(it1,it2,it1.x,it1.y);
                 stage.addChild(contain,instruct,quest);
-  
-                
-                
+
+
+
                 instruct.on("click",function(){stage.removeChild(instruct,contain);intro8();});
 
 
@@ -546,21 +576,21 @@ var game = function(){
         //eigth intro panel
          var intro8 = function(){
                 var instruct = makebutton();
-                
+
                 var back = new createjs.Shape();
                 back.name = "back";
-                back.graphics.beginFill("white").drawRoundRect(100, 270, 400, 60, 10);
+                back.graphics.beginFill("white").drawRoundRect(100, 270, 420, 60, 10);
                 var contain = new createjs.Container();
-                
-                var instructions = new createjs.Text("We have a bunch of tiles... meaning lots of combinations!\nWe could really use your help to figure out the patterns.", "15px Arial","black");
+
+                var instructions = new createjs.Text("We have a bunch of objects... meaning lots of combinations!\nWe could really use your help to figure out the patterns.", "15px Arial","black");
                 instructions.x = 110;
                 instructions.y = 280;
                 contain.addChild(back,instructions);
-               
+
                 it1.y = it2.y = 345;
                 it1.x = 230;
                 it2.x=330;
-                
+
                 it1.alpha=it2.alpha=it3.alpha=1;
                 it1.scaleX=it1.scaleY=it2.scaleX=it2.scaleY=.6;
 
@@ -570,14 +600,14 @@ var game = function(){
                 it6.x=260;
                 it6.y=it3.y=485;
                 it3.x=360;
-                
+
                 it4.scaleX=it4.scaleY=it5.scaleX=it5.scaleY=it6.scaleX=it6.scaleY=it3.scaleX=it3.scaleY=.6;
                 it4.shadow=it5.shadow=it6.shadow=it3.shadow=new createjs.Shadow("gray",3,3,0);
-                
+
                 var quest2 = makequestion(it4,it5,it4.x,it4.y);
                 var quest3 = makequestion(it6,it3,it6.x,it6.y);
                 stage.addChild(contain,instruct,quest,quest2,quest3);
-                
+
                 instruct.on("click",function(){stage.removeChild(quest,quest2,quest3,contain,instruct);intro9();});
 
 
@@ -585,33 +615,33 @@ var game = function(){
         //ninth intro panel
           var intro9 = function(){
                 var instruct = makebutton();
-                
+
                 var back = new createjs.Shape();
                 back.name = "back";
                 back.graphics.beginFill("white").drawRoundRect(100, 270, 390, 70, 10);
                 var contain = new createjs.Container();
-                
+
                 var instructions = new createjs.Text("So here's how it will work. I will show you some of the \ncombinations that we DO know. Then I will ask you to \npredict the answer to a brand new combination.", "15px Arial","black");
                 instructions.x = 110;
                 instructions.y = 280;
                 contain.addChild(back,instructions);
-                
-                
+
+
                 it4.y = it5.y = 380;
                 it4.x = 480;
                 it5.x=750;
                 it4.scaleX=it4.scaleY=it5.scaleX=it5.scaleY=1;
                 it4.regX=it5.regX=it4.regY=it5.regY=50;
-                
+
                 stage.addChild(it4,it5,instruct,contain);
-                
+
                 createjs.Tween.get(it4, {loop:true})
                         .to({ x: 540 }, 1000, createjs.Ease.none)
                         //.to({rotation: 360},500)
                         .to({ alpha: 0, x:575 }, 500)
                         .wait(800)
 
-               
+
                 createjs.Tween.get(it5, {loop:true})
                         .to({ x: 660 }, 1000, createjs.Ease.none)
                         //.to({rotation: -360},500)
@@ -628,10 +658,10 @@ var game = function(){
                         .to({alpha:1,x:570,y:370},400)
                         .wait(800)
                         .call(function(){stage.removeChild(it1)})
-                        
-               
+
+
                 //make the little copies
-                
+
                 it1_copy = new createjs.Bitmap("images/o5.png");
                 it1_copy.scaleX=it1_copy.scaleY = .6;
                 it1_copy.regX=it1_copy.regY=50;
@@ -644,9 +674,9 @@ var game = function(){
                 it4_copy.y = 560;
                 it4_copy.regX=it4_copy.regY=50;
                 it4_copy.shadow = new createjs.Shadow("gray",3,3,0);
-                
-                
-                
+
+
+
                 var quest = makequestion(it1_copy,it4_copy,it1_copy.x,it1_copy.y);
                 stage.addChild(quest);
 
@@ -656,18 +686,18 @@ var game = function(){
         }
         //tenth intro panel
         var intro10 = function(){
-        
+
                 var instruct = makebutton();
                 var back = new createjs.Shape();
                 back.name = "back";
                 back.graphics.beginFill("white").drawRoundRect(100, 270, 390, 70, 10);
                 var contain = new createjs.Container();
-                
+
                 var instructions = new createjs.Text("You will select from the options in the panel on the \nbottom of the screen. Click on the answer that you think \nfits the pattern.", "15px Arial","black");
                 instructions.x = 110;
                 instructions.y = 280;
                 contain.addChild(back,instructions);
-                
+
                 holder.scaleX=holder.scaleY = .5;
                 holder.x = 450;
                 holder.y=610;
@@ -679,7 +709,7 @@ var game = function(){
                 c2.x= 570;
                 c3.x = 630;
                 choices = [c1,c2,c3];
-                
+
                 for(c=0;c< choices.length;c++){
                         choices[c].scaleX=choices[c].scaleY = .6;
                         choices[c].shadow = new createjs.Shadow("gray",3,3,0);
@@ -688,27 +718,32 @@ var game = function(){
                         choices[c].on("mouseout", function(evt){this.shadow = new createjs.Shadow("#808080", 3, 3, 0);});
                         choices[c].on("click", function(evt){alert("Great job!");createjs.Tween.removeTweens(it1);next();});
                         stage.addChild(choices[c]);
-                
+
                 };
-                
-                
-                
+
+
+
                 instruct.on("click",function(){createjs.Tween.removeTweens(it1); next();});
-        
-        
-        
-        }
-        
-        //start the intro sequence
-        intro();
-        
-        //this is the next for the trials
-        function handleClick(evt){
-                
-                next();
+
+
 
         }
-        
+
+        //start the intro sequence
+        intro();
+
+        //this is the next for the trials
+        function handleClick(evt){
+
+                next();
+
+
+        }
+        function goToTest(evt){
+                console.log("hey im here");
+                test();
+        }
+
         function makebutton(){
                 var background = new createjs.Shape();
                 background.name = "background";
@@ -725,13 +760,13 @@ var game = function(){
                 instruct.x = 450;
                 instruct.y = 735;
                 instruct.addChild(background, label);
-                
+
                 return instruct;
-        
-        
-        
+
+
+
         }
-        
+
         function makequestion(arg1,arg2,x,y){
                 var plus = new createjs.Text("+","bold 40px Arial","black")
                 plus.y = y;
@@ -741,10 +776,25 @@ var game = function(){
                 equal.x = x+155;
                 var quest = new createjs.Container();
                 quest.addChild(arg1,arg2,plus,equal);
-                
+
                 return quest;
-        
-        
+
+
+        }
+        function makeexample(arg1, arg2, arg3, x, y){
+                var plus = new createjs.Text("+","bold 40px Arial","black")
+                plus.y = y+20;
+                plus.x = x+80;
+                var equal = new createjs.Text("=","bold 40px Arial","black")
+                equal.y = y+20;
+                equal.x = x+185;
+                var exmp = new createjs.Container();
+                exmp.addChild(arg1,arg2,plus,equal,arg3);
+
+                return exmp;
+
+
+
         }
         function getRandomSubarray(arr, size) {
                 var shuffled = arr.slice(0), i = arr.length, temp, index;
@@ -758,8 +808,8 @@ var game = function(){
         }
 
 
-        
-      
+
+
 
 
 

@@ -15,9 +15,9 @@ var game = function(){
         text.x=300;
         text.y=10;
         text.shadow = new createjs.Shadow("#000", 4, 4, 8);
-        var text2 = new createjs.Text("Concept Factory", "bold 70px Arial", "white");
+        var text2 = new createjs.Text("Factory", "bold 70px Arial", "white");
         text2.shadow = new createjs.Shadow("#000", 4, 4, 8);
-        text2.x=225;
+        text2.x=360;
         text2.y=80;
         stage.update();
 
@@ -76,86 +76,7 @@ var game = function(){
         it1.regX=it1.regY=it2.regX=it2.regY=it3.regX=it3.regY=it4.regX=it4.regY=it5.regX=it5.regY=it6.regX=it6.regY=50;
         var condition = Math.floor(Math.random() * 5);
         var nextcount = 0;
-        var next = function(){
-                nextcount +=1;
-                stage.removeChild(it3);
-                stage.removeAllChildren();
-                stage.update();
-                //it1.regX=it1.regY=it2.regX=it2.regY=it3.regX=it3.regY=it4.regX=it4.regY=it5.regX=it5.regY=it6.regX=it6.regY=0;
-                holder.scaleX=holder.scaleY=1;
-                holder.y=550;
-                holder.x=225;
-                box.regX=box.regY=0;
-                box.x = 400;
-                box.y = 260;
-                gear.x=440;
-                gear.y = 290;
-                gear2.x=440;
-                gear2.y = 350;
-                gear3.x=575;
-                gear3.y = 420;
-                t1.y=600;
-                t1.x=260;
-                t1.scaleX = t1.scaleY = 1.
-                t2.y=600;
-                t2.x=350;
-                t2.scaleX = t2.scaleY = 1.
-                t3.y=600;
-                t3.x=440;
-                t3.scaleX = t3.scaleY = 1.
-                t4.y=600;
-                t4.x=530;
-                t4.scaleX = t4.scaleY = 1.
-                t5.y=600;
-                t5.x=620;
-                t5.scaleX = t5.scaleY = 1.
-                t6.y=600;
-                t6.x=710;
-                t6.scaleX = t6.scaleY = 1.
-
-
-
-
-                var background = new createjs.Shape();
-		background.name = "background";
-		background.graphics.beginFill("gray").drawRoundRect(0, 0, 150, 60, 10);
-
-                var label = new createjs.Text("Next", "bold 24px Arial", "#FFFFFF");
-                label.name = "label";
-                label.textAlign = "center";
-                label.textBaseline = "middle";
-                label.x = 150/2;
-                label.y = 60/2;
-
-                var button = new createjs.Container();
-                button.name = "button";
-                button.x = 450;
-                button.y = 735;
-                button.addChild(background, label);
-                button.on("click", handleClick);
-
-                //populate the stage
-                stage.addChild(box,gear,gear2,gear3,holder,right,left,text,text2,button);
-
-                //turn off the button
-                button.mouseEnabled = false;
-
-        //possible choices
-                var choices = [t1,t2,t3,t4,t5,t6]
-                for(var t=0; t< choices.length;t++) {
-                        stage.addChild(choices[t]);
-                        //choices[t].shadow = new createjs.Shadow("#808080", 3, 3, 0);
-                        choices[t].on("mouseover", function(evt){this.shadow = new createjs.Shadow("yellow", 3, 3, 25);});
-                        choices[t].on("mouseout", function(evt){this.shadow = new createjs.Shadow("#808080", 3, 3, 0);});
-                        choices[t].regX=choices[t].regY=0;
-
-                }
-
-
-
-               //our arguments
-
-               switch(condition){
+          switch(condition){
                 //CONDITION 0: a a -> a
                 case 0:
                         var index = Math.floor(Math.random() * tiles.length);
@@ -215,6 +136,87 @@ var game = function(){
 
 
                }
+        var next = function(){
+                
+                nextcount +=1;
+                stage.removeChild(it3);
+                stage.removeAllChildren();
+                stage.update();
+                //it1.regX=it1.regY=it2.regX=it2.regY=it3.regX=it3.regY=it4.regX=it4.regY=it5.regX=it5.regY=it6.regX=it6.regY=0;
+                holder.scaleX=holder.scaleY=1;
+                holder.y=550;
+                holder.x=225;
+                box.regX=box.regY=0;
+                box.x = 400;
+                box.y = 260;
+                gear.x=440;
+                gear.y = 290;
+                gear2.x=440;
+                gear2.y = 350;
+                gear3.x=575;
+                gear3.y = 420;
+                
+                t1.x=260;
+                t1.scaleX = t1.scaleY = 1.
+                
+                t2.x=350;
+                t2.scaleX = t2.scaleY = 1.
+                
+                t3.x=440;
+                t3.scaleX = t3.scaleY = 1.
+               
+                t4.x=530;
+                t4.scaleX = t4.scaleY = 1.
+                
+                t5.x=620;
+                t5.scaleX = t5.scaleY = 1.
+                
+                t6.x=710;
+                t6.scaleX = t6.scaleY = 1.
+                t1.y=t2.y=t3.y=t4.y=t5.y=t6.y=580;
+
+
+
+                var background = new createjs.Shape();
+		background.name = "background";
+		background.graphics.beginFill("gray").drawRoundRect(0, 0, 150, 60, 10);
+
+                var label = new createjs.Text("Next", "bold 24px Arial", "#FFFFFF");
+                label.name = "label";
+                label.textAlign = "center";
+                label.textBaseline = "middle";
+                label.x = 150/2;
+                label.y = 60/2;
+
+                var button = new createjs.Container();
+                button.name = "button";
+                button.x = 450;
+                button.y = 735;
+                button.addChild(background, label);
+                
+
+                //populate the stage
+                stage.addChild(box,gear,gear2,gear3,holder,right,left,text,text2,button);
+
+                //turn off the button
+                button.mouseEnabled = false;
+
+        //possible choices
+                var choices = [t1,t2,t3,t4,t5,t6]
+                for(var t=0; t< choices.length;t++) {
+                        stage.addChild(choices[t]);
+                        //choices[t].shadow = new createjs.Shadow("#808080", 3, 3, 0);
+                        choices[t].on("mouseover", function(evt){this.shadow = new createjs.Shadow("yellow", 3, 3, 25);});
+                        choices[t].on("mouseout", function(evt){this.shadow = new createjs.Shadow("#808080", 3, 3, 0);});
+                        choices[t].regX=choices[t].regY=0;
+
+                }
+
+
+
+               //our arguments
+
+             
                 tinyarg1.scaleX = tinyarg1.scaleY = tinyarg2.scaleX = tinyarg2.scaleY = tinycorrect.scaleX = tinycorrect.scaleY = .6;
                 tinyarg1.x = 370;
                 tinyarg2.x = 470;
@@ -234,6 +236,7 @@ var game = function(){
                 arg1.regY = 35;
                 arg2.regX=40;
                 arg2.regY=35;
+                arg1.alpha = arg2.alpha = 1;
                 stage.addChild(arg1,arg2);
 
 
@@ -322,14 +325,10 @@ var game = function(){
                          background.graphics.beginFill("#1a8cff").drawRoundRect(0, 0, 150, 60, 10);
                          button.mouseEnabled = true;
                          console.log(nextcount);
-                         if (nextcount < 3){
+                         
 
-                         button.onclick = handleClick;
-                        }
-                        else{
-                                button.onclick = goToTest;
-
-                        }
+                         button.on("click", function(){if(nextcount <3){handleClick();} else{goToTest();}});
+     
                 }
 
         }
@@ -337,6 +336,7 @@ var game = function(){
 
         ///////////////////////////////////////TEST TRIALS//////////////////////////////////////////
         var test = function(){
+                
                 stage.removeAllChildren();
 
 
