@@ -11,14 +11,14 @@ tiles = ["images/o1.png","images/o2.png", "images/o3.png","images/o4.png","image
 //here is the whole thing!
 var game = function(){
         //welcome
-        var text = new createjs.Text("Welcome to the", "bold 48px Arial", "white");
-        text.x=300;
-        text.y=10;
+        var text = new createjs.Text("Welcome to the", "bold 36px Arial", "white");
+        text.x=385;
+        text.y=140;
         text.shadow = new createjs.Shadow("#000", 4, 4, 8);
-        var text2 = new createjs.Text("Factory", "bold 70px Arial", "white");
+        var text2 = new createjs.Text("Factory", "bold 50px Arial", "white");
         text2.shadow = new createjs.Shadow("#000", 4, 4, 8);
-        text2.x=360;
-        text2.y=80;
+        text2.x=420;
+        text2.y=190;
         stage.update();
 
         //here is the "apply box and associated gears"
@@ -76,51 +76,106 @@ var game = function(){
         it1.regX=it1.regY=it2.regX=it2.regY=it3.regX=it3.regY=it4.regX=it4.regY=it5.regX=it5.regY=it6.regX=it6.regY=50;
         var condition = Math.floor(Math.random() * 5);
         var nextcount = 0;
+        /*TEST STIMULI:
+                a a -> ?
+                a b -> ?
+                a c -> ?
+                b b -> ?
+                b a -> ?
+                b c -> ?
+                c a -> ?
+                c b -> ?
+
+        */
           switch(condition){
                 //CONDITION 0: a a -> a
                 case 0:
-                        var index = Math.floor(Math.random() * tiles.length);
-                        var arg1 =  new createjs.Bitmap(tiles[index]);
-                        var arg2 =  new createjs.Bitmap(tiles[index]);
-                        var correct =  new createjs.Bitmap(tiles[index]);
-                        var tinyarg1 = new createjs.Bitmap(tiles[index]);
-                        var tinyarg2 = new createjs.Bitmap(tiles[index]);
-                        var tinycorrect = new createjs.Bitmap(tiles[index]);
+                        var indexes = getRandomSubarray(tiles,3)
+                        var arg1 =  new createjs.Bitmap(indexes[0]);
+                        arg1.set({id:indexes[0]})
+
+                        //psiturk record arg1
+                        var arg2 =  new createjs.Bitmap(indexes[0]);
+                        arg2.set({id:indexes[0]})
+
+                        //psiturk record arg2
+                        var correct =  new createjs.Bitmap(indexes[0]);
+                        correct.set({id:indexes[0]})
+
+                        //psiturk record correct
+                        var tinyarg1 = new createjs.Bitmap(indexes[0]);
+                        var tinyarg2 = new createjs.Bitmap(indexes[0]);
+                        var tinycorrect = new createjs.Bitmap(indexes[0]);
+
+
+
+                        var testargs = [[indexes[0],indexes[0],"a,a"],
+                                        [indexes[0],indexes[1],"a,b"],
+                                        [indexes[0], indexes[2],"a,c"],
+                                        [indexes[1],indexes[1],"b,b"],
+                                        [indexes[1],indexes[0],"b,a"],
+                                        [indexes[1],indexes[2],"b,c"],
+                                        [indexes[2],indexes[0],"c,a"],
+                                        [indexes[2],indexes[1],"c,b"]]
+
+
+
 
 
                         break;
                    //CONDITION 1: a a -> b
                    case 1:
-                        var indexes = getRandomSubarray(tiles,2)
+                        var indexes = getRandomSubarray(tiles,3)
                         var arg1 =  new createjs.Bitmap(indexes[0]);
                         var arg2 =  new createjs.Bitmap(indexes[0]);
                         var correct =  new createjs.Bitmap(indexes[1]);
                         var tinyarg1 = new createjs.Bitmap(indexes[0]);
                         var tinyarg2 = new createjs.Bitmap(indexes[0]);
                         var tinycorrect = new createjs.Bitmap(indexes[1]);
-
+                        var testargs = [[indexes[0],indexes[0],"a,a"],
+                                        [indexes[0],indexes[1],"a,b"],
+                                        [indexes[0], indexes[2],"a,c"],
+                                        [indexes[1],indexes[1],"b,b"],
+                                        [indexes[1],indexes[0],"b,a"],
+                                        [indexes[1],indexes[2],"b,c"],
+                                        [indexes[2],indexes[0],"c,a"],
+                                        [indexes[2],indexes[1],"c,b"]]
                         break;
                 //CONDITION 2: a b -> a
                 case 2:
-                        var indexes = getRandomSubarray(tiles,2)
+                        var indexes = getRandomSubarray(tiles,3)
                         var arg1 =  new createjs.Bitmap(indexes[0]);
                         var arg2 =  new createjs.Bitmap(indexes[1]);
                         var correct =  new createjs.Bitmap(indexes[0]);
                         var tinyarg1 = new createjs.Bitmap(indexes[0]);
                         var tinyarg2 = new createjs.Bitmap(indexes[1]);
                         var tinycorrect = new createjs.Bitmap(indexes[0]);
-
+                        var testargs = [[indexes[0],indexes[0],"a,a"],
+                                        [indexes[0],indexes[1],"a,b"],
+                                        [indexes[0], indexes[2],"a,c"],
+                                        [indexes[1],indexes[1],"b,b"],
+                                        [indexes[1],indexes[0],"b,a"],
+                                        [indexes[1],indexes[2],"b,c"],
+                                        [indexes[2],indexes[0],"c,a"],
+                                        [indexes[2],indexes[1],"c,b"]]
                         break;
                 //CONDITION 3: a b -> b
                 case 3:
-                        var indexes = getRandomSubarray(tiles,2)
+                        var indexes = getRandomSubarray(tiles,3)
                         var arg1 =  new createjs.Bitmap(indexes[0]);
                         var arg2 =  new createjs.Bitmap(indexes[1]);
                         var correct =  new createjs.Bitmap(indexes[1]);
                         var tinyarg1 = new createjs.Bitmap(indexes[0]);
                         var tinyarg2 = new createjs.Bitmap(indexes[1]);
                         var tinycorrect = new createjs.Bitmap(indexes[1]);
-
+                        var testargs = [[indexes[0],indexes[0],"a,a"],
+                                        [indexes[0],indexes[1],"a,b"],
+                                        [indexes[0], indexes[2],"a,c"],
+                                        [indexes[1],indexes[1],"b,b"],
+                                        [indexes[1],indexes[0],"b,a"],
+                                        [indexes[1],indexes[2],"b,c"],
+                                        [indexes[2],indexes[0],"c,a"],
+                                        [indexes[2],indexes[1],"c,b"]]
                         break;
                 //CONDITION 4: a b -> c
                 case 4:
@@ -131,21 +186,27 @@ var game = function(){
                         var tinyarg1 = new createjs.Bitmap(indexes[0]);
                         var tinyarg2 = new createjs.Bitmap(indexes[1]);
                         var tinycorrect = new createjs.Bitmap(indexes[2]);
+                        var testargs = [[indexes[0],indexes[0],"a,a"],
+                                        [indexes[0],indexes[1],"a,b"],
+                                        [indexes[0], indexes[2],"a,c"],
+                                        [indexes[1],indexes[1],"b,b"],
+                                        [indexes[1],indexes[0],"b,a"],
+                                        [indexes[1],indexes[2],"b,c"],
+                                        [indexes[2],indexes[0],"c,a"],
+                                        [indexes[2],indexes[1],"c,b"]]
 
                         break;
 
 
                }
         var next = function(){
-                
+
                 nextcount +=1;
                 stage.removeChild(it3);
                 stage.removeAllChildren();
                 stage.update();
                 //it1.regX=it1.regY=it2.regX=it2.regY=it3.regX=it3.regY=it4.regX=it4.regY=it5.regX=it5.regY=it6.regX=it6.regY=0;
-                holder.scaleX=holder.scaleY=1;
-                holder.y=550;
-                holder.x=225;
+
                 box.regX=box.regY=0;
                 box.x = 400;
                 box.y = 260;
@@ -155,22 +216,22 @@ var game = function(){
                 gear2.y = 350;
                 gear3.x=575;
                 gear3.y = 420;
-                
+
                 t1.x=260;
                 t1.scaleX = t1.scaleY = 1.
-                
+
                 t2.x=350;
                 t2.scaleX = t2.scaleY = 1.
-                
+
                 t3.x=440;
                 t3.scaleX = t3.scaleY = 1.
-               
+
                 t4.x=530;
                 t4.scaleX = t4.scaleY = 1.
-                
+
                 t5.x=620;
                 t5.scaleX = t5.scaleY = 1.
-                
+
                 t6.x=710;
                 t6.scaleX = t6.scaleY = 1.
                 t1.y=t2.y=t3.y=t4.y=t5.y=t6.y=580;
@@ -193,36 +254,27 @@ var game = function(){
                 button.x = 450;
                 button.y = 735;
                 button.addChild(background, label);
-                
+
 
                 //populate the stage
-                stage.addChild(box,gear,gear2,gear3,holder,right,left,text,text2,button);
+                stage.addChild(box,gear,gear2,gear3,right,left,text,text2,button);
 
                 //turn off the button
                 button.mouseEnabled = false;
 
-        //possible choices
-                var choices = [t1,t2,t3,t4,t5,t6]
-                for(var t=0; t< choices.length;t++) {
-                        stage.addChild(choices[t]);
-                        //choices[t].shadow = new createjs.Shadow("#808080", 3, 3, 0);
-                        choices[t].on("mouseover", function(evt){this.shadow = new createjs.Shadow("yellow", 3, 3, 25);});
-                        choices[t].on("mouseout", function(evt){this.shadow = new createjs.Shadow("#808080", 3, 3, 0);});
-                        choices[t].regX=choices[t].regY=0;
 
-                }
 
 
 
                //our arguments
 
-             
+
                 tinyarg1.scaleX = tinyarg1.scaleY = tinyarg2.scaleX = tinyarg2.scaleY = tinycorrect.scaleX = tinycorrect.scaleY = .6;
                 tinyarg1.x = 370;
                 tinyarg2.x = 470;
                 tinycorrect.x = 570;
-                tinyarg1.y = tinyarg2.y = tinycorrect.y = 460;
-                var examp = makeexample(tinyarg1,tinyarg2,tinycorrect,tinyarg1.x,tinyarg1.y);
+                tinyarg1.y = tinyarg2.y = tinycorrect.y = 520;
+                var examp = makeexample(tinyarg1,tinyarg2,tinycorrect,tinyarg1.x,tinyarg1.y,"#7F8C8D");
                 stage.addChild(examp);
                 arg1.x = 295;
                 arg1.y = 315;
@@ -316,7 +368,7 @@ var game = function(){
                         correct.regX=correct.regY=40;
                 }
                 function turnback() {
-                        correct.shadow=new createjs.Shadow("#808080", 3, 3, 0);
+                        correct.shadow=new createjs.Shadow(null);
 
 
                 }
@@ -324,11 +376,10 @@ var game = function(){
                 function lightbutton(){
                          background.graphics.beginFill("#1a8cff").drawRoundRect(0, 0, 150, 60, 10);
                          button.mouseEnabled = true;
-                         console.log(nextcount);
-                         
 
-                         button.on("click", function(){if(nextcount <3){handleClick();} else{goToTest();}});
-     
+
+                         button.on("click", function(){if(nextcount <1){goToNext();} else{stage.removeChild(examp,correct,button);gear.rotation=-360;gear2.rotation=-360;gear3.rotation=-360;goToTest();}});
+
                 }
 
         }
@@ -336,8 +387,220 @@ var game = function(){
 
         ///////////////////////////////////////TEST TRIALS//////////////////////////////////////////
         var test = function(){
-                
-                stage.removeAllChildren();
+                var selected = null;
+                tinyarg1.scaleX = tinyarg1.scaleY = tinyarg2.scaleX = tinyarg2.scaleY = tinycorrect.scaleX = tinycorrect.scaleY = .6;
+                tinyarg1.x = 230;
+                tinyarg2.x = 330;
+                tinycorrect.x = 430;
+                tinyarg1.y = tinyarg2.y = tinycorrect.y = 490;
+                var pleaseclick = new createjs.Text("Please click on the object that you think completes the pattern.","15px Arial","black");
+                var examp = makeexample(tinyarg1,tinyarg2,tinycorrect,tinyarg1.x,tinyarg1.y,"#7F8C8D");
+                pleaseclick.x=320;
+                pleaseclick.y = 580;
+                holder.scaleX=holder.scaleY=.7;
+                holder.y=600;
+                holder.x=305;
+                stage.addChild(holder,examp,pleaseclick);
+                var choices = [];
+                var x = 350;
+                for(var i=0; i < indexes.length;i++){
+                        choices[i]= new createjs.Bitmap(indexes[i]);
+                        choices[i].set({id:indexes[i]});
+
+                        choices[i].y = 590;
+                        choices[i].x=x;
+                        x+=100;
+                }
+
+                for (var i =0; i <choices.length;i++){
+                        choices[i].mouseEnabled=true;
+                        choices[i].on("mouseover", function(evt){this.shadow = new createjs.Shadow("yellow", 3, 3, 25);});
+                        choices[i].on("mouseout", function(evt){this.shadow = new createjs.Shadow(null);});
+                        choices[i].on("click", function(evt){
+
+
+                                this.shadow=new createjs.Shadow("yellow", 3, 3, 25);
+                                this.on("mouseout", function(evt){this.shadow = new createjs.Shadow("yellow",3,3,25);});
+                                for (var j =0; j <choices.length;j++){
+                                choices[j].mouseEnabled=false;}
+                                selected = this;
+
+                                //matches a
+                                if(selected.id == indexes[0]){
+                                        selected.set({val:"a"});
+                                }
+                                if(selected.id == indexes[1]){
+                                        selected.set({val:"b"});
+                                }
+                                if(selected.id == indexes[2]){
+                                        selected.set({val:"c"});
+                                }
+
+                                lightbutton();
+                                //psiTurk record selected.
+                                //I want to record all of the images, just in case I fuck it up or there is a fluke and I want to check it out.
+                                //But I also want to include my special encoding.
+
+                                console.log(selected.id);
+                                console.log(selected.val);
+
+
+                        });
+                        stage.addChild(choices[i]);
+                }
+                //move through testing options and record answers
+
+                shuffle(testargs);
+                //console.log(testargs);
+
+                if (testargs.length == 0) {
+                        alert("ok youre all done!");
+                }
+
+                else{
+                        var currentargs = testargs.shift();
+                        //var currentargs2 = testargs.shift();
+                        //console.log(currentargs);
+
+
+                        arg1 = new createjs.Bitmap(currentargs[0]);
+                        console.log(currentargs[2]);
+                        arg2 = new createjs.Bitmap(currentargs[1]);
+
+                        arg1.x = 295;
+                        arg1.y = 315;
+                        arg2.x = 645;
+                        arg2.y = 315;
+                        var what = new createjs.Text("?", "bold 150px Arial","black");
+                        what.shadow = new createjs.Shadow("yellow",3,3,25);
+                        what.x = 460;
+                        what. y = 270;
+                        what.alpha = 0;
+
+                        arg1.regX = 40;
+                        arg1.regY = 35;
+                        arg2.regX=40;
+                        arg2.regY=35;
+                        arg1.alpha = arg2.alpha = 1;
+                        tinyq1 = new createjs.Bitmap(currentargs[0]);
+                        tinyq2 = new createjs.Bitmap(currentargs[1]);
+                        tinyq1.scaleX=tinyq2.scaleX=tinyq1.scaleY=tinyq2.scaleY=.6;
+
+                        tinyq1.x=550;
+                        tinyq1.y = tinyq2.y = 490;
+                        tinyq2.x=650;
+
+                        //HERE IS THE TEST QUESTION
+                        var quest = makequestion(tinyq1,tinyq2,tinyq1.x,tinyq1.y,"white");
+                        stage.addChild(arg1,arg2,what,quest);
+
+
+                       //some funky movement now!
+
+                       //move the left arm
+                        createjs.Tween.get(left, {loop:false})
+                                .wait(500)
+                                .to({ x: 115 }, 1200, createjs.Ease.none)
+                                .to({ x: 0 }, 1200, createjs.Ease.none)
+                        //move the first argument with the left arm
+                        createjs.Tween.get(arg1, {loop:false})
+                                .wait(500)
+                                .to({ x: 410 }, 1200, createjs.Ease.none)
+                                //.to({rotation: 360},500)
+                                .to({ alpha: 0, x:445 }, 500, createjs.Ease.getPowInOut(2))
+
+                        //move the right arm
+                        createjs.Tween.get(right, {loop:false})
+                                .wait(500)
+                                .to({ x: 565 }, 1200, createjs.Ease.none)
+                                .to({ x: 680 }, 1200, createjs.Ease.none)
+                        //move the second argument with the right arm
+                        createjs.Tween.get(arg2, {loop:false})
+                                .wait(500)
+                                .to({ x: 530 }, 1200, createjs.Ease.none)
+                                //.to({rotation: -360},500)
+                                .to({ alpha: 0, x:505 }, 500, createjs.Ease.getPowInOut(2))
+
+
+                        //rotate the gears all cute-like and whatnot
+                        createjs.Tween.get(gear, {loop:false})
+                                .wait(900)
+                                .to({rotation: -360},2000)
+                        createjs.Tween.get(gear2, {loop:false})
+                                .wait(900)
+                                .to({rotation: -360},2000)
+                        createjs.Tween.get(gear3, {loop:false})
+                                .wait(900)
+                                .to({rotation: -360},2000)
+
+                        createjs.Tween.get(what, {loop:false})
+                                .wait(1500)
+                                .to({ alpha: 1},700)
+
+                                .wait(500)
+                                .to({y:260},400)
+
+                                .to({y:270},400)
+                                .wait(500)
+                                .to({y:260},400)
+
+
+                                .to({y:270},400)
+                                .wait(500)
+                                .to({y:260},400)
+                                .to({y:270},400)
+                                //.wait(500)
+                                //.call(lightbutton)
+
+
+
+
+
+
+                        var background = new createjs.Shape();
+        		background.name = "background";
+        		background.graphics.beginFill("gray").drawRoundRect(0, 0, 150, 60, 10);
+
+                        var label = new createjs.Text("Next", "bold 24px Arial", "#FFFFFF");
+                        label.name = "label";
+                        label.textAlign = "center";
+                        label.textBaseline = "middle";
+                        label.x = 150/2;
+                        label.y = 60/2;
+
+                        var button = new createjs.Container();
+                        button.name = "button";
+                        button.x = 450;
+                        button.y = 735;
+                        button.addChild(background, label);
+
+                        stage.addChild(button);
+                        button.mouseEnabled = false;
+
+
+
+
+                }
+                function turncolor() {
+                        what.shadow=new createjs.Shadow("yellow", 3, 3, 25);
+                        //what.regX=correct.regY=40;
+                }
+
+                //light up the next button
+                function lightbutton(){
+
+                         background.graphics.beginFill("#1a8cff").drawRoundRect(0, 0, 150, 60, 10);
+                         button.mouseEnabled = true;
+
+
+                         button.on("click", function(){stage.removeChild(what,arg1,arg2,button,quest,examp,pleaseclick);for (var i =0; i <choices.length;i++){stage.removeChild(choices[i]);};if (testargs.length >0) {test();}else{last();}});
+
+
+                }
+
+
+
+
 
 
 
@@ -361,6 +624,7 @@ var game = function(){
 
                 //draw Marvin
                 var robot = new createjs.Bitmap("images/robot.png");
+
                 robot.x = 20;
                 robot.y = 350;
                 robot.scaleX=1.2;
@@ -437,7 +701,7 @@ var game = function(){
                 it1.x = 280;
                 it2.x=390;
                 it3.x=380;
-                it1.shadow = it2.shadow = it3.shadow = new createjs.Shadow("#808080", 3, 3, 0);
+                it1.shadow = it2.shadow = it3.shadow = new createjs.Shadow(null);
                 stage.addChild(it1,it2,contain,instruct);
 
                 //bounce the tiles up and down
@@ -510,7 +774,7 @@ var game = function(){
                 it2.x=390;
                 it3.x=570;
                 it3.y=375;
-                it1.shadow = it2.shadow = it3.shadow = new createjs.Shadow("#808080", 3, 3, 0);
+                //it1.shadow = it2.shadow = it3.shadow = new createjs.Shadow(null);
                 stage.addChild(it1,it2,instruct,contain);
                 it3.scaleX=it3.scaleY=1.2;
                 it3.alpha=0;
@@ -564,7 +828,7 @@ var game = function(){
                 it1.scaleX=it1.scaleY=it2.scaleX=it2.scaleY=.6;
                 it3.scaleX=it3.scaleY=1.2;
                 //it3.shadow = new createjs.Shadow("yellow",3,3,25);
-                quest = makequestion(it1,it2,it1.x,it1.y);
+                quest = makequestion(it1,it2,it1.x,it1.y,"none");
                 stage.addChild(contain,instruct,quest);
 
 
@@ -602,10 +866,10 @@ var game = function(){
                 it3.x=360;
 
                 it4.scaleX=it4.scaleY=it5.scaleX=it5.scaleY=it6.scaleX=it6.scaleY=it3.scaleX=it3.scaleY=.6;
-                it4.shadow=it5.shadow=it6.shadow=it3.shadow=new createjs.Shadow("gray",3,3,0);
+                it4.shadow=it5.shadow=it6.shadow=it3.shadow=new createjs.Shadow(null);
 
-                var quest2 = makequestion(it4,it5,it4.x,it4.y);
-                var quest3 = makequestion(it6,it3,it6.x,it6.y);
+                var quest2 = makequestion(it4,it5,it4.x,it4.y,"none");
+                var quest3 = makequestion(it6,it3,it6.x,it6.y,"none");
                 stage.addChild(contain,instruct,quest,quest2,quest3);
 
                 instruct.on("click",function(){stage.removeChild(quest,quest2,quest3,contain,instruct);intro9();});
@@ -631,7 +895,7 @@ var game = function(){
                 it4.x = 480;
                 it5.x=750;
                 it4.scaleX=it4.scaleY=it5.scaleX=it5.scaleY=1;
-                it4.regX=it5.regX=it4.regY=it5.regY=50;
+                it4.regX=it5.regX=it4.regY=it5.regY=it1.regX=it1.regY=50;
 
                 stage.addChild(it4,it5,instruct,contain);
 
@@ -659,26 +923,47 @@ var game = function(){
                         .wait(800)
                         .call(function(){stage.removeChild(it1)})
 
+                it1_copy1 = new createjs.Bitmap("images/o1.png");
+                it1_copy1.scaleX=it1_copy1.scaleY = .6;
+
+                it1_copy1.x = 545;
+                it1_copy1.y = 545;
+
+                it4_copy1 = new createjs.Bitmap("images/o4.png");
+                it4_copy1.scaleX=it4_copy1.scaleY = .6;
+                it4_copy1.x = 345;
+                it4_copy1.y = 545;
+
+
+                it5_copy1 = new createjs.Bitmap("images/o5.png");
+                it5_copy1.scaleX=it5_copy1.scaleY = .6;
+                it5_copy1.x = 445;
+                it5_copy1.y = 545;
+                //it5_copy1.regX=it4_copy1.regY=50;
+
+                var introexamp = makeexample(it4_copy1,it5_copy1,it1_copy1,it4_copy1.x,it4_copy1.y,"#7F8C8D");
+
+
 
                 //make the little copies
 
                 it1_copy = new createjs.Bitmap("images/o5.png");
                 it1_copy.scaleX=it1_copy.scaleY = .6;
                 it1_copy.regX=it1_copy.regY=50;
-                it1_copy.x = 505;
-                it1_copy.y = 560;
-                it1_copy.shadow = new createjs.Shadow("gray",3,3,0);
+                it1_copy.x = 645;
+                it1_copy.y = 545;
+                it1_copy.shadow = new createjs.Shadow(null);
                 it4_copy = new createjs.Bitmap("images/o4.png");
                 it4_copy.scaleX=it4_copy.scaleY = .6;
-                it4_copy.x = 605;
-                it4_copy.y = 560;
+                it4_copy.x = 745;
+                it4_copy.y = 545;
                 it4_copy.regX=it4_copy.regY=50;
-                it4_copy.shadow = new createjs.Shadow("gray",3,3,0);
+                it4_copy.shadow = new createjs.Shadow(null);
 
 
 
-                var quest = makequestion(it1_copy,it4_copy,it1_copy.x,it1_copy.y);
-                stage.addChild(quest);
+                var quest = makequestion(it1_copy,it4_copy,it1_copy.x,it1_copy.y,"white");
+                stage.addChild(quest,introexamp);
 
                 instruct.on("click",function(){stage.removeChild(instruct,contain);intro10()});
 
@@ -700,7 +985,7 @@ var game = function(){
 
                 holder.scaleX=holder.scaleY = .5;
                 holder.x = 450;
-                holder.y=610;
+                holder.y=635;
                 stage.addChild(holder,contain,instruct);
                 c1 = new createjs.Bitmap("images/o1.png");
                 c2 = new createjs.Bitmap("images/o4.png");
@@ -710,21 +995,44 @@ var game = function(){
                 c3.x = 630;
                 choices = [c1,c2,c3];
 
+
+                instruct.on("click",function(){stage.removeChild(holder,c1,c2,c3,instruct,contain,instructions); last_intro();});
+
                 for(c=0;c< choices.length;c++){
                         choices[c].scaleX=choices[c].scaleY = .6;
-                        choices[c].shadow = new createjs.Shadow("gray",3,3,0);
-                        choices[c].y = 620;
+                        choices[c].shadow = new createjs.Shadow(null);
+                        choices[c].y = 640;
                         choices[c].on("mouseover", function(evt){this.shadow = new createjs.Shadow("yellow", 3, 3, 25);});
-                        choices[c].on("mouseout", function(evt){this.shadow = new createjs.Shadow("#808080", 3, 3, 0);});
-                        choices[c].on("click", function(evt){alert("Great job!");createjs.Tween.removeTweens(it1);next();});
+                        choices[c].on("mouseout", function(evt){this.shadow = new createjs.Shadow(null);});
+                        choices[c].on("click", function(evt){stage.removeChild(holder,c1,c2,c3,contain,instruct,instructions);last_intro();});
                         stage.addChild(choices[c]);
 
                 };
 
 
 
-                instruct.on("click",function(){createjs.Tween.removeTweens(it1); next();});
 
+        }
+
+        var last_intro = function(){
+                var instruct = makebutton();
+                var back = new createjs.Shape();
+                back.name = "back";
+                back.graphics.beginFill("white").drawRoundRect(100, 270, 390, 70, 10);
+                var contain = new createjs.Container();
+
+                var instructions = new createjs.Text("Great! Click Next when you are ready to start the game. \nYou will see your first example on the next screen.\nPlease pay close attention.", "15px Arial","black");
+                instructions.x = 110;
+                instructions.y = 280;
+                contain.addChild(back,instructions);
+
+                stage.addChild(contain,instruct);
+
+
+
+
+
+                instruct.on("click",function(){createjs.Tween.removeTweens(it1);next();});
 
 
         }
@@ -733,15 +1041,29 @@ var game = function(){
         intro();
 
         //this is the next for the trials
-        function handleClick(evt){
+        function goToNext(evt){
 
                 next();
 
 
         }
         function goToTest(evt){
-                console.log("hey im here");
+
                 test();
+        }
+
+        var last = function(){
+                stage.removeAllChildren();
+                stage.update();
+                canvas.style.display="none";
+                var question = document.getElementById('header');
+                var explain = document.getElementById('explain');
+                var submit = document.getElementById('sub');
+                sub.style.display="inline";
+                question.style.display="inline";
+                explain.style.display="inline";
+                //record PsiTurk explain
+
         }
 
         function makebutton(){
@@ -767,21 +1089,45 @@ var game = function(){
 
         }
 
-        function makequestion(arg1,arg2,x,y){
+        function makequestion(arg1,arg2,x,y,color){
+
+                arg1.regX=arg1.regY=arg2.regX=arg2.regY=0;
+                if(color!="none"){
+                        var background = new createjs.Shape();
+        		background.name = "background";
+        		background.graphics.beginFill(color).drawRoundRect(x, y, 280, 90, 10);
+                        var text = new createjs.Text("What We Want to Know","bold 20px Arial","#2E86C1");
+                        text.x=x+10;
+                        text.y=y-20;
+
+                }
+                else{
+                        var background =new createjs.Shape();
+                        var text = new createjs.Text();
+                }
                 var plus = new createjs.Text("+","bold 40px Arial","black")
-                plus.y = y;
-                plus.x = x+60;
+                plus.y = y+20;
+                plus.x = x+80;
                 var equal = new createjs.Text("= ?","bold 40px Arial","black")
-                equal.y = y;
-                equal.x = x+155;
+                equal.y = y+20;
+                equal.x = x+185;
                 var quest = new createjs.Container();
-                quest.addChild(arg1,arg2,plus,equal);
+                quest.addChild(background,arg1,arg2,plus,equal,text);
 
                 return quest;
 
 
         }
-        function makeexample(arg1, arg2, arg3, x, y){
+        function makeexample(arg1, arg2, arg3, x, y,color){
+                var text = new createjs.Text("The Pattern We Know","bold 20px Arial","#2E86C1");
+                text.x=x+10;
+                text.y=y-20;
+                var background = new createjs.Shape();
+		background.name = "background";
+		background.graphics.beginFill(color).drawRoundRect(x, y, 290, 90, 10);
+
+
+
                 var plus = new createjs.Text("+","bold 40px Arial","black")
                 plus.y = y+20;
                 plus.x = x+80;
@@ -789,7 +1135,9 @@ var game = function(){
                 equal.y = y+20;
                 equal.x = x+185;
                 var exmp = new createjs.Container();
-                exmp.addChild(arg1,arg2,plus,equal,arg3);
+
+                exmp.addChild(background,arg1,arg2,plus,equal,arg3,text);
+
 
                 return exmp;
 
@@ -805,6 +1153,15 @@ var game = function(){
                         shuffled[i] = temp;
                 }
                 return shuffled.slice(0, size);
+        }
+        function shuffle(a) {
+            var j, x, i;
+            for (i = a.length; i; i--) {
+                j = Math.floor(Math.random() * i);
+                x = a[i - 1];
+                a[i - 1] = a[j];
+                a[j] = x;
+            }
         }
 
 

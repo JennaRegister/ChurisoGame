@@ -16,6 +16,7 @@
                 <script src="https://code.createjs.com/tweenjs-0.6.2.min.js"></script>
 
 
+
                 <style type = "text/css">
 
 
@@ -25,7 +26,14 @@
         <body>
 
 
-                        <div><canvas class="canvas" id = "canvas" width="1000" height = "800"></canvas>
+                        <div><canvas class="canvas" id = "canvas" width="1000" height = "800"></canvas></div>
+
+                        <center><div id="questionaire">
+                                <p id="header" style="display:none;">Thank you for participating in this HIT!
+                                <br>Please describe your reasoning behind your choices.</p>
+                        <br><br><textarea id="explain" cols=100 rows=10 style="display:none;"></textarea><br><br>
+                        <button id="sub"style="display:none">Submit</button>
+                </div></center>
 
 
 
