@@ -8,7 +8,7 @@ stage.enableMouseOver();
 tiles = ["images/o1.png","images/o2.png", "images/o3.png","images/o4.png","images/o5.png","images/o6.png"]
 
 
-//here is the whole thing!
+//here is the wrapper
 var game = function(){
         //welcome
         var text = new createjs.Text("Welcome to the", "bold 36px Arial", "white");
@@ -199,13 +199,12 @@ var game = function(){
 
 
                }
+        //this moves through the TRAINING trials
         var next = function(){
-
+                //keep track of how many you have been through
                 nextcount +=1;
-                stage.removeChild(it3);
                 stage.removeAllChildren();
                 stage.update();
-                //it1.regX=it1.regY=it2.regX=it2.regY=it3.regX=it3.regY=it4.regX=it4.regY=it5.regX=it5.regY=it6.regX=it6.regY=0;
 
                 box.regX=box.regY=0;
                 box.x = 400;
@@ -217,24 +216,7 @@ var game = function(){
                 gear3.x=575;
                 gear3.y = 420;
 
-                t1.x=260;
-                t1.scaleX = t1.scaleY = 1.
 
-                t2.x=350;
-                t2.scaleX = t2.scaleY = 1.
-
-                t3.x=440;
-                t3.scaleX = t3.scaleY = 1.
-
-                t4.x=530;
-                t4.scaleX = t4.scaleY = 1.
-
-                t5.x=620;
-                t5.scaleX = t5.scaleY = 1.
-
-                t6.x=710;
-                t6.scaleX = t6.scaleY = 1.
-                t1.y=t2.y=t3.y=t4.y=t5.y=t6.y=580;
 
 
 
@@ -267,8 +249,6 @@ var game = function(){
 
 
                //our arguments
-
-
                 tinyarg1.scaleX = tinyarg1.scaleY = tinyarg2.scaleX = tinyarg2.scaleY = tinycorrect.scaleX = tinycorrect.scaleY = .6;
                 tinyarg1.x = 370;
                 tinyarg2.x = 470;
@@ -418,12 +398,17 @@ var game = function(){
                         choices[i].on("mouseout", function(evt){this.shadow = new createjs.Shadow(null);});
                         choices[i].on("click", function(evt){
 
-
-                                this.shadow=new createjs.Shadow("yellow", 3, 3, 25);
-                                this.on("mouseout", function(evt){this.shadow = new createjs.Shadow("yellow",3,3,25);});
                                 selected = this;
+                                selected.shadow=new createjs.Shadow("yellow", 3, 3, 25);
+                                selected.on("mouseout", function(evt){this.shadow = new createjs.Shadow("yellow",3,3,25);});
+
+                                createjs.Tween.get(selected, {loop:true})
+
+                                        .to({y:selected.y-10},500)
+                                        .to({y:selected.y},500)
                                 for (var j =0; j <choices.length;j++){
                                 choices[j].mouseEnabled=false;}
+
 
 
 
@@ -546,14 +531,6 @@ var game = function(){
                                 .to({ alpha: 1},700)
 
 
-                                //.wait(500)
-                                //.call(lightbutton)
-
-
-
-
-
-
                         var background = new createjs.Shape();
         		background.name = "background";
         		background.graphics.beginFill("gray").drawRoundRect(0, 0, 150, 60, 10);
@@ -590,10 +567,7 @@ var game = function(){
 
                         pleaseclick.x+=50;
                         pleaseclick.text="Great! Press Next to move on to the next question."
-                        createjs.Tween.get(selected, {loop:true})
 
-                                .to({y:selected.y-10},500)
-                                .to({y:selected.y},500)
 
                          background.graphics.beginFill("#1a8cff").drawRoundRect(0, 0, 150, 60, 10);
                          button.mouseEnabled = true;
@@ -650,7 +624,7 @@ var game = function(){
 
                 var back = new createjs.Shape();
                 back.name = "back";
-                back.graphics.beginFill("white").drawRoundRect(100, 270, 260, 50, 10);
+                back.graphics.beginFill("white").drawRoundRect(100, 270, 270, 50, 10);
 
                 var instructions = new createjs.Text("Hi, uhh, I'm your robot guide, Marvin. \nI work here at the Factory.", "15px Arial","black");
                 instructions.x=110;
@@ -672,7 +646,7 @@ var game = function(){
 
                 var back = new createjs.Shape();
                 back.name = "back";
-                back.graphics.beginFill("white").drawRoundRect(100, 270, 350, 60, 10);
+                back.graphics.beginFill("white").drawRoundRect(100, 270, 370, 60, 10);
 
                 var instructions = new createjs.Text("Here at the factory, we are in the business of, uhh...\n turning things into other things!", "15px Arial","black");
                 instructions.x=110;
@@ -704,7 +678,7 @@ var game = function(){
                 instruct_bubble(contain);
 
                //display some example tiles
-                it1.y = it2.y = it3.y =345;
+                it1.y = it2.y = it3.y =365;
                 it1.x = 280;
                 it2.x=390;
                 it3.x=380;
@@ -758,7 +732,7 @@ var game = function(){
 
                 var back = new createjs.Shape();
                 back.name = "back";
-                back.graphics.beginFill("white").drawRoundRect(100, 270, 350, 50, 10);
+                back.graphics.beginFill("white").drawRoundRect(100, 270, 360, 50, 10);
                 var contain = new createjs.Container();
                 var instructions = new createjs.Text("We discovered that if you combine them in the box, \nthey turn into something else!", "15px Arial","black");
                 instructions.x = 110;
@@ -766,7 +740,7 @@ var game = function(){
                 contain.addChild(back,instructions);
                 instruct_bubble(contain);
                 //position the tiles
-                it1.y = it2.y = 345;
+                it1.y = it2.y = 365;
                 it1.x = 280;
                 it2.x=390;
                 it3.x=570;
@@ -807,7 +781,7 @@ var game = function(){
 
                 var back = new createjs.Shape();
                 back.name = "back";
-                back.graphics.beginFill("white").drawRoundRect(100, 270, 360, 30, 10);
+                back.graphics.beginFill("white").drawRoundRect(100, 270, 360, 40, 10);
                 var contain = new createjs.Container();
 
                 var instructions = new createjs.Text("The only problem is... we can't figure out the pattern.", "15px Arial","black");
@@ -1005,8 +979,8 @@ var game = function(){
 
                                 this.shadow=new createjs.Shadow("yellow", 3, 3, 25);
                                 this.on("mouseout", function(evt){this.shadow = new createjs.Shadow("yellow",3,3,25);});
-                                /*for (var j =0; j <choices.length;j++){
-                                        choices[j].mouseEnabled=false;}*/
+                                for (var j =0; j <choices.length;j++){
+                                        choices[j].mouseEnabled=false;}
                                 selected = this;
                                 createjs.Tween.get(this,{loop:true})
                                         .to({y:this.y-7},500)
